@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestrauntCard"
 import { resList as mockData } from "../Utilities/Mockdata";
 import "./CSS/Body.css"
+import LoadingSpinner from "./LoadingSpinner";
 
 
 
 export default function Body() {
-  const [resList, setResList] = useState(mockData);
-  const handleRatings = ()=>{
-    const filteredList = mockData.filter((res)=>res.info.avgRating>4);
-    setResList(filteredList);
-  };
+  const [resList, setResList] = useState([]);
+  const [search,setSearch] = useState("");
+  const [filtered, setFiltered] = useState([])
+
+
 
   useEffect(()=>{
     fetchData();
@@ -21,19 +22,41 @@ export default function Body() {
     const json = await data.json()
     console.log(json);
 
-    setResList(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+    setResList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    setFiltered(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     
   }
+  
  
   
-  return (
+  return resList.length === 0? <LoadingSpinner/>:(
     <>
       <div className="body">
         <div className="filter">
-          <button className="button" onClick={handleRatings}>Top Rated Restraunts</button>
+         <input
+            type="text"
+            placeholder="Search restaurants..."
+            value={search}
+            className="searchbar"
+            onChange={(e) => setSearch(e.target.value)}
+            
+          />
+          <button
+            className="search"
+            onClick={() => {
+              const filteredList = resList.filter((res) =>
+                res.info.name.toLowerCase().includes(search.toLowerCase())
+              );
+              setFiltered(filteredList);
+            }}
+          >
+            Search
+          </button>
+
         </div>
+        <h1 className="title">Top rated restraunts near you</h1>
         <div className="res-container">
-          {resList.map((restaurant) => (
+          {filtered.map((restaurant) => (
             <RestaurantCard
               key={restaurant.info.id}
               resData={restaurant}

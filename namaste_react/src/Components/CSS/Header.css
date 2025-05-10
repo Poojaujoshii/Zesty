@@ -13,6 +13,7 @@
 }
 .nav-items>ul{
     display: flex;
+    justify-content: center;
 }
 .nav-items>ul>li{
     padding: 20px;
@@ -27,4 +28,12 @@
 }
 .nav-items>ul>li:hover{
     text-decoration: underline;
+}
+#login-btn{
+    color:white;
+    background-Color:#27A745; 
+    font-weight: bold;
+    margin-Top:-12px;
+    padding: 10px 15px;
+    border-radius: 24px;
 }
