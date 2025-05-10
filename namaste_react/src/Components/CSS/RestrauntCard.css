@@ -1,0 +1,36 @@
+.res-card{
+    width: 200px;
+    /* height: 375px; */
+    /* border: 1px solid black; */
+    background-color: #f0f0f0;
+    margin-left: 20px;
+    /* border-radius: 32px; */
+    padding: 5px 10px;
+    margin-top: 20px    ;
+}
+.res-name{
+    color: #27A745;
+    font-weight: 700;
+}
+.res-logo{
+    width: 190;
+    height: auto;
+    margin: 5px;
+    
+
+} 
+.res-card:hover{
+    box-shadow: 0 0 0 2px #a5a5a5;
+    cursor: pointer;
+} 
+.res-container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+.res-data{
+    color: #27A745;
+    font-size: small;
+}
