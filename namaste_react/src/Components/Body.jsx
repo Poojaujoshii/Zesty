@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestrauntCard"
-import { resList as mockData } from "../Utilities/Mockdata";
 import "./CSS/Body.css"
 import LoadingSpinner from "./LoadingSpinner";
 
-
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../Utilities/useOnlineStatus";
 
 export default function Body() {
   const [resList, setResList] = useState([]);
@@ -25,6 +25,11 @@ export default function Body() {
     setResList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     setFiltered(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
     
+  }
+
+  const onlineStatus = useOnlineStatus();
+  if(onlineStatus===false){
+    return <h1>Looks like you're offline please check your internet connection</h1>
   }
   
  
@@ -57,10 +62,7 @@ export default function Body() {
         <h1 className="title">Top rated restraunts near you</h1>
         <div className="res-container">
           {filtered.map((restaurant) => (
-            <RestaurantCard
-              key={restaurant.info.id}
-              resData={restaurant}
-            />
+           <Link  key={restaurant.info.id} to={"/restraunts/"+restaurant.info.id}><RestaurantCard resData={restaurant} /></Link> 
           ))}
         </div>
       </div>
