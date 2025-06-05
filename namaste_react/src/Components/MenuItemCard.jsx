@@ -1,5 +1,4 @@
-// MenuItemCard.jsx
-import "./CSS/MenuItem.css"
+
 
 export default function MenuItemCard({ item }) {
   const { name, description, imageId, price, ratings,defaultPrice } = item?.card?.info;

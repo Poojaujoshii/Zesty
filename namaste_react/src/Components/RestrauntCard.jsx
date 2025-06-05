@@ -1,4 +1,4 @@
-import "./CSS/RestrauntCard.css";
+
 
 export default function ResturauntCard({ resData }) {
   const {cloudinaryImageId ,name,cuisines, sla,avgRating,costForTwo} = resData?.info;
